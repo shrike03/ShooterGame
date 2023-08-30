@@ -9,6 +9,8 @@
   LPM - shoot
   R - reset game
   P - pause game
+# Project purpose
+  Presentation and Demonstration
 # Project Objective
   Demonstrating a basic understanding of Python programming by:
     Creating classes and using them in the game code  include game components, including characters, objects, and buttons. 

@@ -10,7 +10,7 @@
   R - reset game
   P - pause game
 # Project Objective
-  Demonstrating a basic understanding of Python programming by:: 
+  Demonstrating a basic understanding of Python programming by:
     Creating classes and using them in the game code  include game components, including characters, objects, and buttons. 
     Class inheritance through the using of pre-existing classes as a foundation for extending functionalities.
     Organization and segmententing of the code into modules, increasing its transparency, easier manipulation, introducing changes and extension of the project.

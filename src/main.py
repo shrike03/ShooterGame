@@ -1,12 +1,5 @@
-import sys
-
-import pygame
-from Background import Background
-from Button import Button
-from Player import Player
-from Collision_Object import Object
-from Target import Target
-from Counting import Counting
+#main.py is the entry point of the game, responsible for initializing and combining the various components of the code
+from ShooterGame import sys,pygame,Path,Background,Button,Counting,Player,Target, Object
 
 # initializes Pygame library
 pygame.init()
@@ -18,10 +11,33 @@ background_height = 646
 resolution = (background_width, background_height)
 # creating a game display
 window = pygame.display.set_mode(resolution)
+# creating path to folder Images
+images_path = Path(__file__).parent / "ShooterGame" / "Assets" / "Images"
+
+# game menu
+def menu():
+    # loading buttons images
+    play_button = Button(462, 124, str(images_path/"Buttons/play_button.png"))
+    exit_button = Button(460, 384, str(images_path/ "Buttons/exit_button.png"))
+    while True:
+        # quit the game, by using Escape, or closing window
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT or event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+                sys.exit()
+        # go to game core
+        if play_button.tick():
+            core()
+        # exit
+        if exit_button.tick():
+            sys.exit()
+
+        # buttons drawing
+        play_button.draw(window)
+        exit_button.draw(window)
+        # refreshing display
+        pygame.display.update()
 
 # game core
-
-
 def core():
 
     # Method call: Background
@@ -30,7 +46,7 @@ def core():
     player = Player(300, 486)
     # Method call: collision objects(x,y,width,height,image_name)
     structures = [
-                  Object(120, 350, 200, 30, 'Static/platform'),
+                  Object(120, 350, 200, 30,  'Static/platform'),
                   Object(800, 380, 200, 30, 'Static/platform'),
                   Object(670, 150, 120, 30, 'Static/platform'),
                   # display limits
@@ -38,9 +54,10 @@ def core():
                   Object(-1, 0, 1, 646, 'Static/platform'),
                   Object(1224, 0, 1, 646, 'Static/platform')]
 
-    # Method call: Target(x,y,width,height)
-    targets = [Target(20, 20, 48, 50),
-               Target(1160, 450, 48, 50)]
+    #Creating list targets and Method call: Target(x,y,width,height,list)
+    targets=[]
+    targets.append(Target(20, 20, 48, 50,targets))
+    targets.append(Target(1160, 450, 48, 50, targets))
     # Method call: Counting
     counting = Counting()
     # controlling fps
@@ -96,31 +113,6 @@ def core():
         player.draw(window)
         player.update(key, structures, targets, counting)
         # display refresh
-        pygame.display.update()
-
-# game menu
-
-
-def menu():
-    # loading buttons images
-    play_button = Button(462, 124, "Images/Buttons/play_button.png")
-    exit_button = Button(460, 384, "Images/Buttons/exit_button.png")
-    while True:
-        # quit the game, by using Escape, or closing window
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT or event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
-                sys.exit()
-        # go to game core
-        if play_button.tick():
-            core()
-        # exit
-        if exit_button.tick():
-            sys.exit()
-
-        # buttons drawing
-        play_button.draw(window)
-        exit_button.draw(window)
-        # refreshing display
         pygame.display.update()
 
 

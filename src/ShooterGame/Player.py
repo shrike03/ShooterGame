@@ -1,9 +1,4 @@
-import pygame
-from Physics import Physics
-from math import floor
-from Shooting import Shoot
-
-
+from ShooterGame import pygame, Path, Physics, floor, Shoot
 # Constructor code for Player class
 # running animation
 # inherits from Physics
@@ -13,20 +8,22 @@ class Player(Physics):
         # Player coordinates
         self.x_cord = x_cord
         self.y_cord = y_cord
+        # creating path to folder Images
+        images_path = Path(__file__).parent /"Assets" / "Images"
         # load player image, motionless, facing right side
-        self.player_idle_d_R = pygame.image.load("Images/Player/player_1.png").convert_alpha()
+        self.player_idle_d_R = pygame.image.load(str(images_path/"Player/player_1.png")).convert_alpha()
         # load player image, motionless, facing left side
         self.player_idle_d_L = pygame.transform.flip(self.player_idle_d_R, True, False)
         # load player image, jumping, facing right side
-        self.player_jump_d_R = pygame.image.load("Images/Player/player_6.png").convert_alpha()
+        self.player_jump_d_R = pygame.image.load(str(images_path/"Player/player_6.png")).convert_alpha()
         # load player image, jumping, facing left side
         self.player_jump_d_L = pygame.transform.flip(self.player_jump_d_R, True, False)
         # list of player images, running, facing right side, 'x' is frame number
         self.player_run_d_R = [(pygame.image.load(
-            f"Images/Player/player_{x}.png").convert_alpha()) for x in range(3, 8)]
+           str(images_path/ f"Player/player_{x}.png")).convert_alpha()) for x in range(3, 8)]
         # list of player images, running, facing left side, 'x' is frame number
         self.player_run_d_L = [(pygame.transform.flip(pygame.image.load(
-            f"Images/Player/player_{x}.png"), True, False).convert_alpha()) for x in range(3, 8)]
+            str(images_path/f"Player/player_{x}.png")), True, False).convert_alpha()) for x in range(3, 8)]
         # Player dimensions used in Parent class: Physics
         width = self.player_idle_d_R.get_width()
         height = self.player_idle_d_R.get_height()
@@ -71,7 +68,7 @@ class Player(Physics):
 
         # shoot hitbox and counting targets hits
         for shoot in self.shoots:
-            shoot.tick(targets, counting)
+            shoot.tick(targets,counting)                       
         if not pygame.mouse.get_pressed()[0]:
             self.press = False
 

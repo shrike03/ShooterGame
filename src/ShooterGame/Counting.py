@@ -1,7 +1,6 @@
 import pygame
 
-# class counts how many target Player shoot
-
+# class counts how many targets Player shoot
 
 class Counting:
     def __init__(self):
@@ -17,9 +16,10 @@ class Counting:
         # counter
         self.count_txt = self.font_count.render(f'Amount: {self.count}', True, (255, 255, 255))
 
-    def tick(self):
+    def tick(self,hit):
+         if hit==True:
         # increasing counter
-        self.count += 1
+            self.count += 1
 
     def draw(self, window):
         # drawing counter

@@ -1,5 +1,4 @@
 import pygame
-
 #class defines button
 #hitbox detection on mouse click
 class Button:

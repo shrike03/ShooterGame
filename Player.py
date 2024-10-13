@@ -71,7 +71,7 @@ class Player(Physics):
 
         # shoot hitbox and counting targets hits
         for shoot in self.shoots:
-            shoot.tick(targets, counting)
+            shoot.tick(targets,counting)                       
         if not pygame.mouse.get_pressed()[0]:
             self.press = False
 

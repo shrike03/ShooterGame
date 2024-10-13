@@ -21,6 +21,9 @@ class Shoot(Physics):
         height = self.right.get_height()
         # shoot direction
         self.direction = direction
+        # checking whether the target was hit, used in counting and target
+        # allows adding new reaction for hit
+        self.hit = False
         # Call the constructor of the parent class
         # Physics(x_cord, y_cord, width, height, gravity, acceleration, maximum velocity)
         # defines hitbox
@@ -28,7 +31,6 @@ class Shoot(Physics):
 
     def tick(self, targets, counting):
         self.physic_tick(targets)
-
         # move depending on direction
         if self.direction == 0:
             self.vel_hor += self.acc
@@ -39,25 +41,14 @@ class Shoot(Physics):
 
         # hitbox for shooting target
         for target in targets:
-            if self.hitbox_player.colliderect(target.hitbox_ob):
+            if self.hitbox_player.colliderect(target.hitbox_ob) and not self.hit:
+                self.hit=True
                 # remove the hit target
                 targets.remove(target)
-                # + 1 to counter
-                counting.tick()
-                # creating new target depend on which is hit
-                if target.x_cord == 1160:
-                    # increasing the speed of the new target
-                    new_acc = target.acc + 1
-                    # Initialize the Target class (x_cord, y_cord, width, height)
-                    target = Target(1160, random.randint(60, 600), 48, 50)
-                    target.acc = new_acc
-                    # adding target to list
-                    targets.append(target)
-                if target.x_cord == 20:
-                    new_acc = target.acc + 1
-                    target = Target(20, random.randint(60, 600), 48, 50)
-                    target.acc = new_acc
-                    targets.append(target)
+                 # + 1 to counter
+                counting.tick(self.hit)
+                target.new_target(self.hit)    
+        self.hit = False
 
     def draw(self, window):
         # draw Shoot

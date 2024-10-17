@@ -1,9 +1,8 @@
 import pygame
-from Physics import Physics
+from .Physics import Physics
 from math import floor
-from Shooting import Shoot
+from .Shooting import Shoot
 from pathlib import Path
-
 
 # Constructor code for Player class
 # running animation
@@ -15,7 +14,7 @@ class Player(Physics):
         self.x_cord = x_cord
         self.y_cord = y_cord
         # creating path to folder Images
-        images_path = Path(__file__).parent / "Assets" / "Images"
+        images_path = Path(__file__).parent / "Shooter" /"Assets" / "Images"
         # load player image, motionless, facing right side
         self.player_idle_d_R = pygame.image.load(str(images_path/"Player/player_1.png")).convert_alpha()
         # load player image, motionless, facing left side

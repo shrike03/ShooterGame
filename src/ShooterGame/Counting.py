@@ -2,7 +2,6 @@ import pygame
 
 # class counts how many target Player shoot
 
-
 class Counting:
     def __init__(self):
         # location coordinate

@@ -5,11 +5,10 @@ from pathlib import Path
 # class defines scrolling backgrounds,
 # speed background = 2 frames per second
 
-
 class Background:
     def __init__(self, resolution):
         # creating path to folder Images
-        images_path = Path(__file__).parent / "Assets" / "Images"
+        images_path = Path(__file__).parent / "Shooter" / "Assets" / "Images"
         # background image load
         self.image = pygame.image.load(str(images_path/"Background/background.png")).convert()
         # rect to represent the image's coordinates and size

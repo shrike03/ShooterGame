@@ -1,8 +1,6 @@
-import sys
-import os
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from ShooterGame import pygame,Path,Background,Button,Counting,Player,Target, Object
+#main.py is the entry point of the game, responsible for initializing and combining the various components of the code
 
+from ShooterGame import sys,pygame,Path,Background,Button,Counting,Player,Target, Object
 
 # initializes Pygame library
 pygame.init()
@@ -15,7 +13,7 @@ resolution = (background_width, background_height)
 # creating a game display
 window = pygame.display.set_mode(resolution)
 # creating path to folder Images
-images_path = Path(__file__).parent / "Assets" / "Images"
+images_path = Path(__file__).parent / "Shooter" / "Assets" / "Images"
 
 # game menu
 def menu():

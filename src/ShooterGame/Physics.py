@@ -1,11 +1,9 @@
 import pygame
 
-
 # class defines Physics
 # defines movemant mechanics (moving in Cartesian coordinates, acceleration, velocity)
 # defines hitbox
 # defines gravity
-
 
 class Physics:
     def __init__(self, x_cord, y_cord, width, height, grav, acc, max_vel, w, h):

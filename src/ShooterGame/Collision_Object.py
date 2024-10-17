@@ -13,7 +13,7 @@ class Object:
         # hitbox object
         self.hitbox_ob = pygame.Rect(self.x_cord, self.y_cord, self.width, self.height)
         # creating path to folder Images
-        images_path = Path(__file__).parent / "Assets" / "Images"
+        images_path = Path(__file__).parent / "Shooter" / "Assets" / "Images"
         # the name of the loaded image and folder f.e. static/platform
         self.img_name = img_name
         # image loading

@@ -1,11 +1,10 @@
 import pygame
 import random
-from Collision_Object import Object
+from .Collision_Object import Object
 
 # Target class create moving targets,
 # Player have to shoot targets,
 # from Object, takes hitbox and drawing,
-
 
 class Target(Object):
     def __init__(self, x_cord, y_cord, width, height, targets):

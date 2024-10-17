@@ -1,6 +1,6 @@
 import pygame
 from Physics import Physics
-
+from pathlib import Path
 
 # Constructor code for Shoot class
 # if the shoot object hits the target, the counter increases by 1, the shoot object is removed
@@ -11,8 +11,10 @@ class Shoot(Physics):
     def __init__(self, x_cord, y_cord, direction):
         # shoot image
         self.image = self
+        # creating path to folder Images
+        images_path = Path(__file__).parent / "Assets" / "Images"
         # shoot image right vector, depends on Player direction
-        self.right = pygame.image.load("Images/Bullet/bullet.png").convert_alpha()
+        self.right = pygame.image.load(str(images_path/"Bullet/bullet.png")).convert_alpha()
         # shoot image left vector, depends on Player direction
         self.left = pygame.transform.flip(self.right, True, False)
         # shoot object dimensions

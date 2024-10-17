@@ -1,12 +1,8 @@
 import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from ShooterGame import pygame,Path,Background,Button,Counting,Player,Target, Object
 
-import pygame
-from Background import Background
-from Button import Button
-from Player import Player
-from Collision_Object import Object
-from Target import Target
-from Counting import Counting
 
 # initializes Pygame library
 pygame.init()
@@ -18,12 +14,14 @@ background_height = 646
 resolution = (background_width, background_height)
 # creating a game display
 window = pygame.display.set_mode(resolution)
+# creating path to folder Images
+images_path = Path(__file__).parent / "Assets" / "Images"
 
 # game menu
 def menu():
     # loading buttons images
-    play_button = Button(462, 124, "Images/Buttons/play_button.png")
-    exit_button = Button(460, 384, "Images/Buttons/exit_button.png")
+    play_button = Button(462, 124, str(images_path/"Buttons/play_button.png"))
+    exit_button = Button(460, 384, str(images_path/ "Buttons/exit_button.png"))
     while True:
         # quit the game, by using Escape, or closing window
         for event in pygame.event.get():
@@ -51,7 +49,7 @@ def core():
     player = Player(300, 486)
     # Method call: collision objects(x,y,width,height,image_name)
     structures = [
-                  Object(120, 350, 200, 30, 'Static/platform'),
+                  Object(120, 350, 200, 30,  'Static/platform'),
                   Object(800, 380, 200, 30, 'Static/platform'),
                   Object(670, 150, 120, 30, 'Static/platform'),
                   # display limits

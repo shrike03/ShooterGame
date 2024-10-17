@@ -1,4 +1,5 @@
 import pygame
+from pathlib import Path
 
 # image width = 7344
 # class defines scrolling backgrounds,
@@ -7,8 +8,10 @@ import pygame
 
 class Background:
     def __init__(self, resolution):
+        # creating path to folder Images
+        images_path = Path(__file__).parent / "Assets" / "Images"
         # background image load
-        self.image = pygame.image.load("Images/Background/background.png").convert()
+        self.image = pygame.image.load(str(images_path/"Background/background.png")).convert()
         # rect to represent the image's coordinates and size
         self.rect = self.image.get_rect()
         # coordinate using in shift image

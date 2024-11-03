@@ -5,11 +5,13 @@ from ShooterGame import pygame,Path
 # speed background = 2 frames per second
 
 class Background:
-    def __init__(self, resolution):
+    def __init__(self, resolution,background_img):
         # creating path to folder Images
-        images_path = Path(__file__).parent / "Assets" / "Images"
+        images_path = Path(__file__).parent / "Assets" / "Images"/ f'{background_img}.png'
+        # Background image select
+        self.background_img = background_img
         # background image load
-        self.image = pygame.image.load(str(images_path/"Background/background.png")).convert()
+        self.image = pygame.image.load(str(images_path)).convert()
         # rect to represent the image's coordinates and size
         self.rect = self.image.get_rect()
         # coordinate using in shift image

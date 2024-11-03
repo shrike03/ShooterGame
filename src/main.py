@@ -1,5 +1,5 @@
 #main.py is the entry point of the game, responsible for initializing and combining the various components of the code
-from ShooterGame import sys,pygame,Path,Background,Button,Counting,Player,Target, Object
+from ShooterGame import sys,pygame,Background,Control,Button,Counting,Player,Target, Object
 
 # initializes Pygame library
 pygame.init()
@@ -11,14 +11,14 @@ background_height = 646
 resolution = (background_width, background_height)
 # creating a game display
 window = pygame.display.set_mode(resolution)
-# creating path to folder Images
-images_path = Path(__file__).parent / "ShooterGame" / "Assets" / "Images"
-
 # game menu
 def menu():
+     # Method call: Background
+    background = Background(resolution,'Background/menu')
     # loading buttons images
-    play_button = Button(462, 124, str(images_path/"Buttons/play_button.png"))
-    exit_button = Button(460, 384, str(images_path/ "Buttons/exit_button.png"))
+    play_button = Button(462, 60, "Buttons/play_button","Buttons/play_button_b")
+    control_button = Button(462, 256, "Buttons/control_button", "Buttons/control_button_b")
+    exit_button = Button(462, 452, "Buttons/exit_button", "Buttons/exit_button_b")
     while True:
         # quit the game, by using Escape, or closing window
         for event in pygame.event.get():
@@ -27,21 +27,49 @@ def menu():
         # go to game core
         if play_button.tick():
             core()
+        # go to control panel
+        if control_button.tick():
+           control_panel()
         # exit
         if exit_button.tick():
             sys.exit()
 
+        # background draw
+        background.draw(window)
         # buttons drawing
         play_button.draw(window)
+        control_button.draw(window)
         exit_button.draw(window)
+        # refreshing display
+        pygame.display.update()
+
+def control_panel():
+    # Method call: Background
+    background = Background(resolution,'Background/menu')
+    # Method call: Controls
+    controls = Control()
+    while True:
+        # quit the game, by closing window
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                sys.exit()
+            # back to the main menu by using Escape 
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+                menu()
+                
+        # background draw
+        background.draw(window)
+        # controls adding text
+        controls.tick()
+        # controls panel draw
+        controls.draw(window)
         # refreshing display
         pygame.display.update()
 
 # game core
 def core():
-
     # Method call: Background
-    background = Background(resolution)
+    background = Background(resolution,'Background/background')
     # Method call: Player(x,y)
     player = Player(300, 486)
     # Method call: collision objects(x,y,width,height,image_name)
@@ -65,7 +93,7 @@ def core():
     #  value of maximum fps
     max_fps = 60
     # pause font
-    p_font = pygame.font.SysFont("arial", 50)
+    p_font = pygame.font.SysFont('Sitka Small Bold', 50)
     # pause text
     pause_txt = p_font.render('PAUSE', True, (255, 255, 255))
     # pause
@@ -75,10 +103,13 @@ def core():
     while True:
         # limited to 60 fps
         clock.tick(max_fps) / 1000
-        # quit the game, by using Escape, or closing window
+        # quit the game, by closing window
         for event in pygame.event.get():
-            if event.type == pygame.QUIT or event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+            if event.type == pygame.QUIT:
                 sys.exit()
+            # back to the main menu by using Escape
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+                menu()
             # restart the game by pressing 'r'
             if event.type == pygame.KEYDOWN and event.key == pygame.K_r:
                 core()

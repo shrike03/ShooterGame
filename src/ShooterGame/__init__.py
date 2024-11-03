@@ -7,6 +7,7 @@ from math import floor
 from pathlib import Path
 from .Background import Background
 from .Button import Button
+from .Control import Control
 from .Collision_Object import Object
 from .Counting import Counting
 from .Physics import Physics

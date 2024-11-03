@@ -12,7 +12,7 @@ class Counting:
         # initial number of hits
         self.count = 0
         # font
-        self.font_count = pygame.font.SysFont('arial', 20)
+        self.font_count = pygame.font.SysFont('Sitka Small Bold', 30)
         # counter
         self.count_txt = self.font_count.render(f'Amount: {self.count}', True, (255, 255, 255))
 
